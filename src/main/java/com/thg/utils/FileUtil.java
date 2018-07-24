@@ -56,7 +56,7 @@ public class FileUtil {
 	
 	public static void main(String[] args) {
 		try {
-			FileUtil.getFileList("E:\\tmp\\maven4web");
+			FileUtil.getFileList("E:\\tmp\\maven4java");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
