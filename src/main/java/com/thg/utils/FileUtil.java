@@ -2,6 +2,8 @@ package com.thg.utils;
 
 import java.io.File;
 
+import org.apache.commons.io.FileUtils;
+
 public class FileUtil {
 
 	/**
@@ -29,7 +31,12 @@ public class FileUtil {
 		String tmpStr = "";
 		if(filePath.isDirectory()) {
 //			tmpStr = tmpStr + geneString(fillCode, classCnt) +"____"+ filePath.getName() + "\r\n";
-			System.out.println(geneString(fillCode, classCnt) +"____"+ filePath.getName()); //由于大目录会导致内存溢出报错，这里直接输出单行结果
+			try {
+				System.out.println(geneString(fillCode, classCnt) +"____"+ filePath.getName() + "\t" + getDirectorySize(filePath.getAbsolutePath(),"g"));
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} //由于大目录会导致内存溢出报错，这里直接输出单行结果
 			File[] files = filePath.listFiles();
 			if(files!=null && files.length>0) {
 				for(int i=0; i<files.length; i++) {
@@ -54,9 +61,36 @@ public class FileUtil {
 		return sf.toString();
 	}
 	
+	/**
+	 * <DESC>获取文件目录大小
+	 * @param dirPath 文件目录
+	 * @param unit 单位
+	 * @return
+	 * @throws Exception
+	 */
+	public static String getDirectorySize(String dirPath, String unit) throws Exception {
+		String result = "";
+		File tmpFile = new File(dirPath);
+		if(!tmpFile.exists()) {
+			throw new Exception("file ["+dirPath+"] not found");
+		}
+		if(!tmpFile.isDirectory()){
+			throw new Exception("file ["+dirPath+"] is not a directory");
+		}
+		long size = FileUtils.sizeOfDirectory(new File(dirPath));
+		if("k".equalsIgnoreCase(unit)) {
+			result = (size/1024) + "K";
+		}else if("m".equalsIgnoreCase(unit)) {
+			result = (size/1024/1024) + "M";
+		}else if("g".equalsIgnoreCase(unit)) {
+			result = (size/1024/1024/1024) + "G";
+		}
+		return result;
+	}
+	
 	public static void main(String[] args) {
 		try {
-			FileUtil.getFileList("E:\\tmp\\maven4java");
+			FileUtil.getFileList("C:\\Users");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

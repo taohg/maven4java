@@ -1,5 +1,8 @@
 package mavenTest;
 
+import java.io.File;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -9,7 +12,10 @@ import java.util.Map;
 import java.util.Random;
 import java.util.Set;
 
+import org.apache.commons.io.FileUtils;
+
 import com.alibaba.fastjson.JSONObject;
+import com.thg.utils.FileUtil;
 
 public class Test {
 	public static final String STR_1 = "";
@@ -31,60 +37,25 @@ public class Test {
 		}
 	}
 	
-	public static void main(String[] args) {
-		ArrayList alist = new ArrayList();
-		alist.add("111");
-		System.out.println(Integer.MAX_VALUE);
-//		System.out.println(String.valueOf(null));
-		System.out.println((String)null);
-		
-//		Test t = new Test();
-//		Set s = new HashSet();
-//		int i = 1;
-//		double dv = 2.05;
-//		System.out.println("*********:" + dv*10000);
+	public static void main(String[] args) throws Exception {
+		File file = new File("D:/12333");
+		long size = FileUtils.sizeOfDirectory(new File("D:\\Implication"));
+		System.out.println("Size: " + size + " bytes");
+        System.out.println("----------" + FileUtil.getDirectorySize("D:\\Implication", "m"));
+        
+        
+		Map tmpMap = new HashMap();
+		List list = new ArrayList();
+		list.add(null);
+		System.out.println(list.isEmpty() + "---------" + list.size());
+		tmpMap.putAll((HashMap)list.get(0));
+//		ArrayList alist = new ArrayList();
+//		alist.add("111");
+//		System.out.println(Integer.MAX_VALUE);
+//		String[] ars = new String[] {"1", "3"};
+//		System.out.println(ars.length);
 //		
-//		double dd = Double.parseDouble("0");
-//		System.out.println("*********:" + dd*10000);
-//		
-//		Integer ir = new Integer(1);
-////		Long lg = new Long("123456789012");
-//		Long lg = new Long("99999999999");
-//		map.put("v1", ir);
-//		System.out.println("----s1:" + lg.intValue());
-//		s.add("1111");
-//		s.add("222");
-//		System.out.println("----s:" + s);
-//		String s1 = "v"+null;
-//		System.out.println("xxxxxxx:" + s1 + "zzzzzz" + s1.length());
-//
-//		String str = "[\"script\", \"mid, 123,<\"]";
-//		Set tmpList = JSONObject.parseObject(str, HashSet.class);
-		Map m = new HashMap();
-//		String str = "[{\"script\", \"mid\"}]";
-//		List tmpList = JSONObject.parseObject(str, ArrayList.class);
-//		System.out.println("------aaa" + "a".equals(null));
-//		System.out.println("------tmpList" + tmpList.size());
-//		System.out.println("----------begin..." + JSONObject.parseObject(String.valueOf(m.get("1")), Map.class));
-//		System.out.println("----------begin..." + 14%7);
-//		t.printMap();
-//		t.addItem("k1", "v1");
-//		t.addItem("k2", "v2");
-//		t.addItem("k3", "v3");
-//		Map tMap = new HashMap();
-//		System.out.println("--1111---begin..." + tMap.isEmpty());
-//		tMap.put("11", "11-v");
-//		System.out.println("--2222---begin..." + tMap.isEmpty());
-//		t.printMap();
-//		System.out.println("----------end...");
-//		
-//		String str = null;
-//		System.out.println("********:" + String.valueOf(str) + "----");
-//		
-//		
-//		Random rand = new Random(10);
-//		for(int i=0; i<20; i++) {
-//		System.out.println(rand.nextInt(5));
-//		}
+//		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+//		System.out.println(format.parse("2018-07-31"));
 	}
 }
