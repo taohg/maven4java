@@ -79,13 +79,82 @@ public class FileUtil {
 		}
 		long size = FileUtils.sizeOfDirectory(new File(dirPath));
 		if("k".equalsIgnoreCase(unit)) {
-			result = (size/1024) + "K";
+			result = (size/1024) + "";
 		}else if("m".equalsIgnoreCase(unit)) {
-			result = (size/1024/1024) + "M";
+			result = (size/1024/1024) + "";
 		}else if("g".equalsIgnoreCase(unit)) {
-			result = (size/1024/1024/1024) + "G";
+			result = (size/1024/1024/1024) + "";
 		}
 		return result;
+	}
+	
+	public static String getDirectorySize(String dirPath) throws Exception{
+		return getDirectorySize(dirPath, "m");
+	}
+	
+	/**
+	 * <DESC>打印目录下的文件目录大小
+	 * @param dirPath
+	 */
+	public static void listDirectorySize(String dirPath) {
+		listDirectorySize(dirPath, 0);
+	}
+	
+	/**
+	 * <DESC>打印目录下的文件目录大小
+	 * @param dirPath
+	 */
+	public static void listDirectorySize(String dirPath, int minSize) {
+		File tmpRoot = new File(dirPath);
+		try {
+			if(tmpRoot.isDirectory()) {
+				int fileSize = Integer.parseInt(getDirectorySize(dirPath,"m"));
+				if(fileSize > minSize) {
+					System.out.println(dirPath + "\t"+ getDirectorySize(dirPath,"m")+"M");
+				}
+				
+				File[] files = tmpRoot.listFiles();
+				if(files!=null && files.length>0) {
+					for(File e : files) {
+						listDirectorySize(e.getAbsolutePath(), minSize);
+					}
+				}
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	/**
+	 * <DESC>打印目录下的文件目录大小
+	 * @param dirPath
+	 * @param minSize
+	 * @param dirClass 要扫描到第几级子目录，如1-表示一级子目录
+	 */
+	public static void listDirectorySize(String dirPath, int minSize, int childDirClass) {
+		File tmpRoot = new File(dirPath);
+		if(childDirClass < 0)return ;
+		try {
+			if(tmpRoot.isDirectory()) {
+				int fileSize = Integer.parseInt(getDirectorySize(dirPath,"m"));
+				if(fileSize >= minSize) {
+					System.out.println(dirPath + "\t"+ getDirectorySize(dirPath,"m")+"M");
+				}
+				
+				File[] files = tmpRoot.listFiles();
+				if(files!=null && files.length>0) {
+					for(File e : files) {
+//						for(int i=childDirClass; i>=0; i--) {
+							listDirectorySize(e.getAbsolutePath(), minSize, childDirClass-1);
+//						}
+					}
+				}
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 	public static void main(String[] args) {

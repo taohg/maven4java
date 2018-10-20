@@ -4,6 +4,7 @@ import java.io.File;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -39,16 +40,20 @@ public class Test {
 	
 	public static void main(String[] args) throws Exception {
 		File file = new File("D:/12333");
-		long size = FileUtils.sizeOfDirectory(new File("D:\\Implication"));
-		System.out.println("Size: " + size + " bytes");
-        System.out.println("----------" + FileUtil.getDirectorySize("D:\\Implication", "m"));
+//		long size = FileUtils.sizeOfDirectory(new File("D:\\Implication"));
+//		System.out.println("Size: " + size + " bytes");
+//        System.out.println("----------" + FileUtil.getDirectorySize("D:\\Implication", "m"));
+		System.out.println("begin Time:"+new Date());
+        FileUtil.listDirectorySize("C:", 50, 2);
+        System.out.println("end Time:"+new Date());
+//        FileUtil.listDirectorySize("E:\\tmp", 0, 2);
         
         
 		Map tmpMap = new HashMap();
 		List list = new ArrayList();
 		list.add(null);
-		System.out.println(list.isEmpty() + "---------" + list.size());
-		tmpMap.putAll((HashMap)list.get(0));
+//		System.out.println(list.isEmpty() + "---------" + list.size());
+//		tmpMap.putAll((HashMap)list.get(0));
 //		ArrayList alist = new ArrayList();
 //		alist.add("111");
 //		System.out.println(Integer.MAX_VALUE);
