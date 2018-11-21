@@ -18,8 +18,14 @@ public class TestInit {
 	}
 	
 	public static void main(String[] args) {
-//		TestInit.staticMethod();
-		System.out.println(TestInit.staticProperty);
+		//先静态块，后构造方法
+		TestInit t = new TestInit("");
+		TestInit.staticMethod();
+		System.out.println("----"+TestInit.staticProperty);
+//		boolean b = Boolean.valueOf("TrU");
+//		if(b) {
+//			System.out.println("wo s 1");
+//		}
 	}
 
 }
